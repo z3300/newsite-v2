@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readdir, readFile } from 'fs/promises';
+import { join } from 'path';
+
+// Read all markdown files from the blog content directory
+const blogDir = join(process.cwd(), 'src/content/blog');
+const blogFiles = await readdir(blogDir);
+
+// Extract frontmatter data from each blog post
+const blogs = await Promise.all(
+  blogFiles
+    .filter(file => file.endsWith('.md'))
+    .map(async (file) => {
+      const content = await readFile(join(blogDir, file), 'utf-8');
+      const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      
+      if (frontmatterMatch) {
+        const frontmatter = frontmatterMatch[1];
+        const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
+        const date = frontmatter.match(/date:\s*"([^"]+)"/)?.[1] || '';
+        
+        return {
+          slug: file.replace('.md', ''),
+          title,
+          date
+        };
+      }
+      return null;
+    })
+);
+
+// Filter out any null entries and sort by date (newest first)
+const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog !== null).sort((a, b) => 
+  new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+---
+
+<Layout>
+  <main class="blog-list">
+    <!-- Page title -->
+    <h1>Blog Posts</h1>
+    
+    <!-- Blog posts list with minimal styling -->
+    <div class="posts-container">
+      {validBlogs.map((blog) => (
+        <div class="blog-item">
+          <!-- Clickable blog title with date -->
+          <a href={`/post/${blog.slug}`} class="blog-link">
+            {blog.title} - {blog.date}
+          </a>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Main container with centered content but left-aligned text */
+  .blog-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+  }
+
+  /* Page title styling */
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+  }
+
+  /* Container for all blog posts */
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Individual blog item (no box styling) */
+  .blog-item {
+    /* No padding, borders, or background */
+  }
+
+  /* Blog title and date link styling */
+  .blog-link {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    transition: opacity 0.2s ease;
+    display: block;
+    text-align: left;
+  }
+
+  .blog-link:hover {
+    opacity: 0.7;
+  }
+
+  /* Responsive design for mobile */
+  @media (max-width: 768px) {
+    .blog-list {
+      padding: 1rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .blog-link {
+      font-size: 1.1rem;
+    }
+  }
+</style> 
