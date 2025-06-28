@@ -37,21 +37,36 @@ const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
 const date = frontmatter.match(/date:\s*"([^"]+)"/)?.[1] || '';
 const description = frontmatter.match(/description:\s*"([^"]+)"/)?.[1] || '';
 
-// Simple markdown to HTML conversion with link support
+// Simple markdown to HTML conversion with link support including video support
 const htmlContent = markdownContent
   .replace(/^# (.+)$/gm, '<h1>$1</h1>')
   .replace(/^## (.+)$/gm, '<h2>$1</h2>')
   .replace(/^### (.+)$/gm, '<h3>$1</h3>')
   .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
   .replace(/\*(.+?)\*/g, '<em>$1</em>')
-  .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<figure><img src="$2" alt="$1" /><figcaption>$1</figcaption></figure>')
+  .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
+    // Check if it's a video file based on extension
+    if (src.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i)) {
+      const videoType = src.split('.').pop().toLowerCase();
+      const mimeType = videoType === 'mov' ? 'mp4' : videoType;
+      return `<figure class="video-container">
+        <video width="100%" controls>
+          <source src="${src}" type="video/${mimeType}">
+          Your browser does not support the video tag.
+        </video>
+        ${alt ? `<figcaption>${alt}</figcaption>` : ''}
+      </figure>`;
+    }
+    // Otherwise treat as image
+    return `<figure><img src="${src}" alt="${alt}" /><figcaption>${alt}</figcaption></figure>`;
+  })
   .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
   .replace(/^- (.+)$/gm, '<li>$1</li>')
   .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
   .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
   .replace(/`([^`]+)`/g, '<code>$1</code>')
   .replace(/\n\n/g, '</p><p>')
-  .replace(/^(?!<[h1-6]|<ul|<pre|<li|<figure)(.+)$/gm, '<p>$1</p>')
+  .replace(/^(?!<[h1-6]|<ul|<pre|<li|<figure|<video)(.+)$/gm, '<p>$1</p>')
   .replace(/<p><\/p>/g, '');
 ---
 
@@ -59,7 +74,7 @@ const htmlContent = markdownContent
   <main class="blog-post">
     <!-- Back to blogs link -->
     <nav class="blog-nav">
-      <a href="/blogs" class="back-link">← Back to Posts</a>
+      <a href="/blogs" class="back-link">← back</a>
     </nav>
     
     <!-- Blog post header with title and date (no separator line) -->
@@ -158,6 +173,22 @@ const htmlContent = markdownContent
     font-weight: bold;
     font-style: normal;
     text-align: center;
+  }
+
+  /* Video container styling */
+  .blog-content :global(.video-container) {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  /* Video styling */
+  .blog-content :global(video) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
   }
 
   /* Headings within blog content */

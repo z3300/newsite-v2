@@ -4,6 +4,8 @@ date: "2024-01-04"
 description: "Creator AI"
 ---
 
+<video width="100%" controls><source src="/videos/creator.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+
 
 # Try the Creator Companion out [here](https://creatorai-p4r1.onrender.com/). 
 # Also try out the Accenture AI for the "Accenture AI Leaders Podcast" [here](https://accenture-ai.herokuapp.com/).
@@ -22,7 +24,7 @@ By leveraging the capabilities of LangChain, the transcripts were split into sma
 ### Vector Representation and Pinecone Integration:
 The next key step in the development process was to leverage text embeddings to create a vector representation of the text chunks. OpenAI's "text embedding ada 002" model was used to generate these embeddings. These vector representations of the text chunks were then stored in a vector database called Pinecone. Pinecone, a vector search engine, provided an efficient way to perform similarity searches, enabling the app to quickly and accurately identify relevant sections of the podcast in response to user queries.
 
-![visual](/darkvisual.png)
+![flow of data](/images/darkvisual.png)
 
 ### Backend Development with Flask:
 The backend of the Creator Companion app was built using Flask, a lightweight Python web framework. Flask facilitated the development of the app's server-side components and provided a robust foundation for handling user interactions and requests.

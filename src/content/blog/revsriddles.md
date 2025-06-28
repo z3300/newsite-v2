@@ -8,7 +8,9 @@ at texas a&m, i was part of an org called datathon.
 
 [datathon](https://tamudatathon.org/) is basically a hackathon focused on data.
 
-> "we are the largest data science and machine learning focused hackathon in texas located at texas a&m university in college station."
+```
+we are the largest data science and machine learning focused hackathon in texas located at texas a&m university in college station.
+```
 
 as a challenges organizer, my main responsibility was creating a beginner-focused challenge, something participants with little to no coding experience could still meaningfully engage with.
 
