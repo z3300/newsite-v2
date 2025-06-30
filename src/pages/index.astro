@@ -8,7 +8,7 @@ import newSvg from '../assets/new.svg';
 		<div class="content-wrapper">
 			<div class="image-container">
 				<img
-					src="/images/Untitled_Artwork.png"
+					src="/images/shadowpic.png"
 					alt="Untitled Artwork"
 					class="hero-image"
 				/>
@@ -49,17 +49,18 @@ import newSvg from '../assets/new.svg';
 		position: relative;
 		display: inline-block;
 		width: 70%;
+
 	}
 
 	.new-badge {
 		position: absolute;
-		top: 12%;
-		left: 0;
+		top: 10%;
+		left:-5%;
 		width: 25%;
 		height: auto;
-		animation: flash 1.5s infinite;
+		animation: flash 1.2s infinite;
 		pointer-events: none;
-		filter: invert(14%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(97%) contrast(113%); /* Makes SVG red */
+		/* filter: invert(14%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(97%) contrast(113%); /* Makes SVG red */
 	}
 
 	.hero-image {
@@ -69,6 +70,7 @@ import newSvg from '../assets/new.svg';
 		height: auto;
 		object-fit: contain;
 		display: block;
+		/* Add a small drop shadow to the image only */
 	}
 
 	.hero-text {
