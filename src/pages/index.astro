@@ -1,18 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import newSvg from '../assets/new.svg';
 ---
 
 <Layout>
 	<main class="hero-container">
 		<div class="content-wrapper">
-			<img 
-				src="/images/Untitled_Artwork.png" 
-				alt="Untitled Artwork" 
-				class="hero-image"
-			/>
+			<div class="image-container">
+				<img
+					src="/images/Untitled_Artwork.png"
+					alt="Untitled Artwork"
+					class="hero-image"
+				/>
+				<img src={newSvg.src} alt="New" class="new-badge" />
+			</div>
 
 			<div class="hero-text">
-
 				<h1>
 					Zeeshan Chatur
 				</h1>
@@ -22,6 +25,11 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
+	@keyframes flash {
+		50% {
+			opacity: 0;
+		}
+	}
 	.hero-container {
 		display: flex;
 		justify-content: center;
@@ -37,27 +45,52 @@ import Layout from '../layouts/Layout.astro';
 		gap: 0.5rem; /* Reduced gap to push text closer to image */
 	}
 
+	.image-container {
+		position: relative;
+		display: inline-block;
+		width: 70%;
+	}
+
+	.new-badge {
+		position: absolute;
+		top: 12%;
+		left: 0;
+		width: 25%;
+		height: auto;
+		animation: flash 1.5s infinite;
+		pointer-events: none;
+		filter: invert(14%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(97%) contrast(113%); /* Makes SVG red */
+	}
+
 	.hero-image {
-		max-width:70%;
+		max-width: 100%;
 		max-height: 70vh;
 		width: auto;
 		height: auto;
 		object-fit: contain;
+		display: block;
 	}
 
 	.hero-text {
-		text-align: right;
+		text-align: center;
 		margin-top: -5rem; /* Added negative margin to pull text up */
 	}
 
 	@media (max-width: 768px) {
+		.image-container {
+			width: 95%;
+		}
 		.hero-image {
-			max-width: 95%;
+			max-width: 100%;
 			max-height: 60vh;
 		}
 		
 		.hero-container {
 			padding: 0.5rem;
+		}
+		.new-badge {
+			right: 10%;
+			width: 25%;
 		}
 	}
 </style>
