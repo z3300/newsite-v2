@@ -45,9 +45,9 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
     <div class="posts-container">
       {validBlogs.map((blog) => (
         <div class="blog-item">
-          <!-- Clickable blog title with date -->
+          <!-- Clickable blog date with title -->
           <a href={`/post/${blog.slug}`} class="blog-link">
-            {blog.title} - {blog.date}
+            {blog.date} – {blog.title}
           </a>
         </div>
       ))}
@@ -55,23 +55,37 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
   </main>
 </Layout>
 
+<style is:global>
+  /* Re-enable scrolling for blog pages */
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+</style>
+
 <style>
   /* Main container with centered content but left-aligned text */
   .blog-list {
     max-width: 600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 7rem 2rem 2rem; /* Add top padding to account for fixed header */
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    min-height: calc(100vh - 7rem);
   }
 
   /* Page title styling */
   h1 {
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
     font-weight: bold;
     color: #000;
     text-align: left;
+    width: 100%;
   }
 
   /* Container for all blog posts */
@@ -79,6 +93,8 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
+    align-items: left;
   }
 
   /* Individual blog item (no box styling) */
@@ -96,10 +112,11 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
     transition: opacity 0.2s ease;
     display: block;
     text-align: left;
+    width: 100%;
   }
 
   .blog-link:hover {
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   /* Responsive design for mobile */
@@ -110,7 +127,7 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
     
     h1 {
       font-size: 2rem;
-      margin-bottom: 2rem;
+      margin-top: 10rem;
     }
     
     .blog-link {

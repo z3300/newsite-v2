@@ -88,12 +88,20 @@ const htmlContent = markdownContent
   </main>
 </Layout>
 
+<style is:global>
+  /* Re-enable scrolling for blog post pages */
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+</style>
+
 <style>
   /* Main blog post container with centered content but left-aligned text */
   .blog-post {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 7rem 2rem 2rem; /* Add top padding to account for fixed header */
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
     line-height: 1.6;

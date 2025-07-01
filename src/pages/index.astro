@@ -19,6 +19,23 @@ import newSvg from '../assets/new.svg';
 				<h1>
 					Zeeshan Chatur
 				</h1>
+				<div class="social-icons">
+					<a href="https://github.com/z3300" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+						<i class="fab fa-github social-icon"></i>
+					</a>
+					<a href="mailto:zeeshanchatur@gmail.com" aria-label="Email">
+						<i class="fas fa-envelope social-icon"></i>
+					</a>
+					<a href="https://linkedin.com/in/zeeshanchatur" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+						<i class="fab fa-linkedin social-icon"></i>
+					</a>
+					<a href="https://twitter.com/zeechatur" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+						<i class="fab fa-twitter social-icon"></i>
+					</a>
+					<a href="https://open.spotify.com/user/zee133" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+						<i class="fab fa-spotify social-icon"></i>
+					</a>
+				</div>
 			</div>
 		</div>
 	</main>
@@ -34,8 +51,11 @@ import newSvg from '../assets/new.svg';
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-height: 80vh;
+		height: 100vh;
 		padding: 2rem;
+		overflow: hidden;
+		position: relative;
+		z-index: 1;
 	}
 
 	.content-wrapper {
@@ -78,6 +98,24 @@ import newSvg from '../assets/new.svg';
 		margin-top: -5rem; /* Added negative margin to pull text up */
 	}
 
+	.social-icons {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1.5rem;
+		margin-top: 1rem;
+	}
+
+	.social-icon {
+		font-size: 2rem;
+		color: #000000;
+		transition: color 0.1s ease, transform 0.1s ease;
+	}
+
+	.social-icon:hover {
+		color: #949494;
+	}
+
 	@media (max-width: 768px) {
 		.image-container {
 			width: 95%;
@@ -93,6 +131,14 @@ import newSvg from '../assets/new.svg';
 		.new-badge {
 			right: 10%;
 			width: 25%;
+		}
+
+		.social-icons {
+			gap: 1rem;
+		}
+
+		.social-icon {
+			font-size: 1.8rem;
 		}
 	}
 </style>

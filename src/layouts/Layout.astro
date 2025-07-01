@@ -9,6 +9,7 @@ import Header from '../components/Header.astro';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	</head>
 	<body>
 		<Header />
@@ -21,9 +22,9 @@ import Header from '../components/Header.astro';
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
-		padding-top: 5rem; /* Add padding to push content below the fixed header */
+		height: 100vh;
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-weight: bold;
+		overflow: hidden; /* Disable scrolling */
 	}
 </style>
