@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
+import newSvg from '../assets/new.svg';
 
 // Read all markdown files from the blog content directory
 const blogDir = join(process.cwd(), 'src/content/blog');
@@ -51,7 +52,7 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
           <a href={`/posts/${blog.slug}`} class="blog-link">
             <span class="blog-text">{blog.date} – {blog.title}</span>
             {blog.isNew && (
-              <img src="/src/assets/new.svg" alt="New" class="new-badge" />
+              <img src={newSvg.src} alt="New" class="new-badge" />
             )}
           </a>
         </div>
