@@ -1,8 +1,10 @@
 <header>
   <nav>
     <a href="/" class="glass-button">home</a>
+    <a href="/about" class="glass-button">about</a>
     <a href="/blogs" class="glass-button">blog</a>
     <a href="https://notecard-public.vercel.app/" class="glass-button">notecards</a>
+
   </nav>
 </header>
 
@@ -40,5 +42,20 @@
   .glass-button:hover {
     background: rgba(83, 83, 83, 0.2);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    header {
+      padding: 1rem 0.75rem;
+    }
+    
+    nav {
+      gap: 0.75rem;
+    }
+    
+    .glass-button {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+    }
   }
 </style> 
