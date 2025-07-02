@@ -2,6 +2,7 @@
 title: "Rev's Riddles"
 date: "2025-06-05"
 description: "Useful JavaScript techniques to improve your coding efficiency"
+new: true
 ---
 
 at texas a&m, i was part of an org called datathon. 

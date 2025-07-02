@@ -19,11 +19,13 @@ const blogs = await Promise.all(
         const frontmatter = frontmatterMatch[1];
         const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
         const date = frontmatter.match(/date:\s*"([^"]+)"/)?.[1] || '';
+        const isNew = frontmatter.match(/new:\s*true/i) !== null;
         
         return {
           slug: file.replace('.md', ''),
           title,
-          date
+          date,
+          isNew
         };
       }
       return null;
@@ -46,8 +48,11 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
       {validBlogs.map((blog) => (
         <div class="blog-item">
           <!-- Clickable blog date with title -->
-          <a href={`/post/${blog.slug}`} class="blog-link">
-            {blog.date} – {blog.title}
+          <a href={`/posts/${blog.slug}`} class="blog-link">
+            <span class="blog-text">{blog.date} – {blog.title}</span>
+            {blog.isNew && (
+              <img src="/src/assets/new.svg" alt="New" class="new-badge" />
+            )}
           </a>
         </div>
       ))}
@@ -64,6 +69,11 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
 </style>
 
 <style>
+  @keyframes flash {
+		50% {
+			opacity: 0;
+		}
+	}
   /* Main container with centered content but left-aligned text */
   .blog-list {
     max-width: 600px;
@@ -92,14 +102,17 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
   .posts-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
     align-items: left;
   }
 
-  /* Individual blog item (no box styling) */
+  /* Individual blog item with consistent height */
   .blog-item {
-    /* No padding, borders, or background */
+    height: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
   /* Blog title and date link styling */
@@ -110,9 +123,27 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
     font-size: 1.2rem;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     transition: opacity 0.2s ease;
-    display: block;
+    display: flex;
+    align-items: center;
     text-align: left;
     width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Blog text container */
+  .blog-text {
+    flex: 1;
+    line-height: 2rem;
+  }
+
+  /* New badge styling */
+  .new-badge {
+    width: 50px;
+    height: 50px;
+    margin-right: 10rem;
+    flex-shrink: 0;
+    animation: flash 2s infinite;
   }
 
   .blog-link:hover {
@@ -132,6 +163,11 @@ const validBlogs = blogs.filter((blog): blog is NonNullable<typeof blog> => blog
     
     .blog-link {
       font-size: 1.1rem;
+    }
+    .new-badge {
+      width: 50px;
+      height: 50px;
+      margin-left: 0.25rem;
     }
   }
 </style> 
