@@ -6,7 +6,7 @@ showBackLink: false
 ---
 
 
-Hi, my name is Zeeshan Chatur. I’m a recent graduate of Texas A&M University, where I majored in Management Information Systems.
+Hello, my name is Zeeshan Chatur. I recently completed my undergrad from Texas A&M University with a bachelor's  in Management Information Systems + Cybersecurity.
 
 I’m passionate about data analytics, storytelling with data, and keeping up with the latest in AI and machine learning.
 

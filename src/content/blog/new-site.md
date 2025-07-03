@@ -5,7 +5,7 @@ description: "my new site"
 new: true
 ---
 
-this is my new website. it took me a while to get it up and running, but i'm happy with the result.
+this is my new website. it took me a while to vibe code lol.
 
 built with astro, tailwind, and shadcn/ui.
 

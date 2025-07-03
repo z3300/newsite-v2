@@ -1,6 +1,6 @@
 ---
 title: "One Byte: Pizza Review Analysis"
-date: "2024-01-04"
+date: "2022-10-13"
 description: "One Byte"
 ---
 ![pizza](/images/pizza/pic9.png)

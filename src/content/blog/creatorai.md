@@ -1,6 +1,6 @@
 ---
 title: "Creator Companion"
-date: "2024-01-04"
+date: "2023-04-10"
 description: "Creator AI"
 ---
 
