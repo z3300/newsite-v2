@@ -5,6 +5,10 @@ description: "Useful JavaScript techniques to improve your coding efficiency"
 new: true
 ---
 
+### try the game [here](https://revs-marbles-test.vercel.app/)
+
+-----------
+
 at texas a&m, i was part of an org called datathon. 
 
 [datathon](https://tamudatathon.org/) is basically a hackathon focused on data.
